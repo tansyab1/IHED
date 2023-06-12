@@ -32,7 +32,7 @@ def Average(lst):
 
 # Create a VideoCapture object and read from input file
 # If the input is the camera, pass 0 instead of the video file name
-for file in tqdm(glob.glob("/home/nguyentansy/DATA/nguyentansy/PhD-work/Datasets/LVQ/uneven_illum/video2*.avi")):
+for file in tqdm(glob.glob("/home/nguyentansy/DATA/nguyentansy/PhD-work/Datasets/LVQ/uneven_illum/video*.avi")):
     cap = cv2.VideoCapture(file)
     names.append(os.path.basename(file))
     # Check if camera opened successfully
@@ -47,7 +47,7 @@ for file in tqdm(glob.glob("/home/nguyentansy/DATA/nguyentansy/PhD-work/Datasets
         if ret is True:
             # Display the resulting frame
             img = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            median = cv2.medianBlur(img[:, :, 2], 201)
+            median = cv2.medianBlur(img[:, :, 2], img[:, :, 2].shape[0]//4)
             ori = median.copy()
             equ = cv2.equalizeHist(median)
             res = np.zeros(equ.shape)
